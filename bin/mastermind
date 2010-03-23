@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+$LOAD_PATH.push File.join(File.dirname(__FILE__), "/../lib")
+require 'mastermind'
+
+game = Mastermind::Game.new(STDOUT)
+pegs = %w[r g y b c w]
+code = (1..4).collect{ pegs.delete_at(rand(pegs.length)) }
+game.start(code)
+
+while(guess = gets)
+  game.guess(guess.split)
+  break if game.over?
+end
